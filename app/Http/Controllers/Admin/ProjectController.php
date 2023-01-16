@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -28,7 +29,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all(); // get all categories
+        // pass the categories to the view  
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -47,8 +50,6 @@ class ProjectController extends Controller
             // replace the value of cover_image inside $val_data
             $val_data['cover_image'] = $cover_image;
         }
-        //replace the value of cover_image inside $val_data
-        $val_data['cover_image'] = $cover_image;
         // generate project slug
         $project_slug = Project::generateSlug($val_data['title']);
         $val_data['slug'] = $project_slug;
@@ -77,7 +78,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all(); // get all categories
+        return view('admin.projects.edit', compact('project', 'types')); // pass the categories to the view 
     }
 
     /**

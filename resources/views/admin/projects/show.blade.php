@@ -13,6 +13,10 @@
 
 <h1>{{$project->title}}</h1>
 <h5>{{$project->slug}}</h5>
+<div class="type">
+    <strong>Type:</strong>
+    {{ $project->type ? $project->type->name : 'Uncategorized'}}
+</div>
 <div class="description">
     {{$project->description}}
 </div>
