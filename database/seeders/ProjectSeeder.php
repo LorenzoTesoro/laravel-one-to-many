@@ -22,6 +22,7 @@ class ProjectSeeder extends Seeder
             $project = new Project();
             $project->title = $faker->sentence(3);
             $project->slug = Str::slug($project->title, '-');
+            $project->cover_image = 'placeholders/clfyMMg00OiowO5uupKpVKjRwmV.jpg' . $faker->image('storage/app/public/placeholders', 600, 300, 'Project', false, false);
             $project->description = $faker->text(200);
             $project->save();
         }
